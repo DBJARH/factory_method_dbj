@@ -1,6 +1,9 @@
 # Application Architecture
 
-Do not use non-default constructors. Use factory methods.
+### Do not use non-default constructors. Use factory methods.
+
+>[!TIP]
+>Also see the [previous work](https://dbj.org/c-be-carefull-to-use-default-constructors-only/) on this very subject.
 
 ---
 
