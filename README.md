@@ -4,6 +4,7 @@
 
 >[!TIP]
 >Also see the [previous work](https://dbj.org/c-be-carefull-to-use-default-constructors-only/) on this very subject.
+>Same philosphy but it is C++ repo.
 
 ---
 
