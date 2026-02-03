@@ -3,6 +3,7 @@ public interface IPatent
 {
     string Pto { get; }
     string Jurisdiction { get; }
+    bool IsEmpty();
 }
 
 // Concrete Patent implementation
@@ -26,12 +27,13 @@ sealed record Patent : IPatent
     // shorthand init variant
     public string Pto { get; init; } = string.Empty;
     // a bit more elaborate init setter variant
-    public string Jurisdiction 
-    { 
-        get => Jurisdiction; 
+    private string _jurisdiction = string.Empty;
+    public string Jurisdiction
+    {
+        get => _jurisdiction;
         // init setter value can be assigned only from some ctor
         // but we avoid ctors delibarately
-        init => Jurisdiction = value ?? string.Empty;
+        init => _jurisdiction = value ?? string.Empty;
     }
 
     // Private default constructor prevents direct instantiation
@@ -45,6 +47,9 @@ sealed record Patent : IPatent
         // Jurisdiction = string.Empty;
     }
 
+    // Patent is empty if either Pto or Jurisdiction is missing
+    public bool IsEmpty() => string.IsNullOrEmpty(Pto) || string.IsNullOrEmpty(Jurisdiction);
+
     // Async factory method
     // factory method assures controlled instantiation
     // this is a class method so it does not complicate the type
@@ -52,6 +57,11 @@ sealed record Patent : IPatent
     {
         // Simulate async work (e.g., validation, database lookup, API call)
         await Task.Delay(100);
+
+        if (jurisdiction != "AUS")
+        {
+            return new Patent(); // empty instance
+        }
 
         // Create and set properties
         var patent = new Patent

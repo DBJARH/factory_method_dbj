@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug dbj_factory_method",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/dbj_factory_method/bin/Debug/net9.0/dbj_factory_method.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/dbj_factory_method",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        }
+    ]
+}
