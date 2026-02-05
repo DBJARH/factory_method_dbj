@@ -1,4 +1,4 @@
-# .NET Application Architecture
+# Application Architecture 
 
 ### Do not use non-default constructors. Use factory methods.
 
@@ -7,7 +7,7 @@
 >Same philosphy but it is C++ repo.
 
 ---
-
+## .NET C#
 ## Appendix: Dev Environment Setup, Build & Debug
 
 ### Prerequisites
