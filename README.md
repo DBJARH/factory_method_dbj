@@ -1,5 +1,21 @@
 # Application Architecture 
 
+For me the clean alternative: static factory method
+
+```cs
+class Service {
+    private Service(Database db) { ... }  // private, trivial, cannot fail
+
+    public static Result<Service> Create(Database db) {
+        if (db == null) return Result.Fail("no db");
+        return Result.Ok(new Service(db));
+    }
+}
+```
+
+Constructor just does no work. All fallible logic lives in a method that can return an error. This is what C++ `std::expected` and Rust `Result` enforce structurally.
+C# primary constructors make this worse — they nudge you toward putting logic in the constructor implicitly, with no guard rails.
+
 ### Do not use non-default constructors. Use factory methods.
 
 >[!TIP]
