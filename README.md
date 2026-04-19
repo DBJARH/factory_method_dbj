@@ -1,19 +1,25 @@
 # Application Architecture 
 
-For me the clean alternative: static factory method
+> [!NOTE] Primary constructors (C# 12, .NET 8) let you declare constructor parameters directly on the class/struct declaration. Parameters are in scope throughout the entire type body.
+
+Still for me the clean alternative: static factory method
 
 ```cs
 class Service {
-    private Service(Database db) { ... }  // private, trivial, cannot fail
+    private Database _db;
+
+    private Service() { }  // trivial, safe
 
     public static Result<Service> Create(Database db) {
         if (db == null) return Result.Fail("no db");
-        return Result.Ok(new Service(db));
+        var s = new Service();
+        s._db = db;
+        return Result.Ok(s);
     }
 }
 ```
 
-Constructor just does no work. All fallible logic lives in a method that can return an error. This is what C++ `std::expected` and Rust `Result` enforce structurally.
+(primary) Constructor just does no work. Contrary to that, all fallible logic lives in a **factory method** that can return an error. This is what C++ `std::expected` and Rust `Result` enforce structurally.
 C# primary constructors make this worse — they nudge you toward putting logic in the constructor implicitly, with no guard rails.
 
 ### Do not use non-default constructors. Use factory methods.
